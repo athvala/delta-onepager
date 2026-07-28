@@ -21,9 +21,7 @@ weasyprint index.html delta-onepager.pdf
 
 ## Fonts
 
-The stylesheet expects these files in `fonts/` (not committed):
+Committed in `fonts/`:
 
-- `fonts/Inter-400.ttf`, `Inter-500.ttf`, `Inter-600.ttf`, `Inter-700.ttf` — [Inter](https://rsms.me/inter/)
-- `fonts/PlexMono.ttf` — [IBM Plex Mono](https://github.com/IBM/plex)
-
-Without them the page falls back to system sans-serif / monospace.
+- `Inter-400/500/600/700.ttf` — [Inter](https://rsms.me/inter/) v4.1 (SIL OFL 1.1)
+- `PlexMono.ttf` — [IBM Plex Mono](https://github.com/IBM/plex) Regular (SIL OFL 1.1)
