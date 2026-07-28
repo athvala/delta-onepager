@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Delta by Simplified AI — One-Pager</title>
+<meta name="author" content="Simplified AI d.o.o.">
+<meta name="description" content="Delta finds why AI systems fail in production and proves the fix did not break something that used to work.">
+<style>
+  @font-face { font-family: 'Inter'; src: url('fonts/Inter-400.ttf'); font-weight: 400; }
+  @font-face { font-family: 'Inter'; src: url('fonts/Inter-500.ttf'); font-weight: 500; }
+  @font-face { font-family: 'Inter'; src: url('fonts/Inter-600.ttf'); font-weight: 600; }
+  @font-face { font-family: 'Inter'; src: url('fonts/Inter-700.ttf'); font-weight: 700; }
+  @font-face { font-family: 'PlexMono'; src: url('fonts/PlexMono.ttf'); font-weight: 400; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  :root {
+    --ink: #14181F;
+    --body: #2B323C;
+    --muted: #6B7583;
+    --rule: #DFDAD2;
+    --paper: #FCFBF9;
+    --tint: #F3F0EA;
+    --accent: #A8402A;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper);
+    color: var(--body);
+    font-size: 7.75pt;
+    line-height: 1.37;
+    -weasy-hyphens: none;
+  }
+
+  .page {
+    width: 210mm;
+  }
+
+  /* ---------- header ---------- */
+  header {
+    background: var(--ink);
+    color: #FCFBF9;
+    padding: 9.5mm 14mm 6.5mm 14mm;
+  }
+  .topline {
+    display: table;
+    width: 100%;
+    padding-bottom: 5.5mm;
+    border-bottom: 0.4pt solid rgba(252,251,249,0.22);
+  }
+  .topline > div { display: table-cell; vertical-align: bottom; }
+  .wordmark {
+    font-size: 17pt;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #FCFBF9;
+  }
+  .wordmark .delta { color: var(--accent); margin-right: 1.5mm; }
+  .wordmark .by {
+    font-size: 8pt;
+    font-weight: 400;
+    color: rgba(252,251,249,0.55);
+    letter-spacing: 0;
+    margin-left: 2mm;
+  }
+  .meta {
+    font-family: 'PlexMono', monospace;
+    font-size: 6.9pt;
+    color: rgba(252,251,249,0.6);
+    text-align: right;
+    line-height: 1.55;
+  }
+  .promise {
+    margin-top: 5.6mm;
+    font-size: 14.2pt;
+    font-weight: 600;
+    letter-spacing: -0.021em;
+    line-height: 1.24;
+    color: #FCFBF9;
+    max-width: 150mm;
+  }
+  .promise em { font-style: normal; color: var(--accent); }
+  .subpromise {
+    margin-top: 2.8mm;
+    font-size: 8.1pt;
+    font-weight: 400;
+    color: rgba(252,251,249,0.68);
+    max-width: 145mm;
+    line-height: 1.5;
+  }
+
+  /* ---------- body ---------- */
+  .body {
+    display: table;
+    table-layout: fixed;
+    width: 182mm;
+    margin: 6.5mm 14mm 2.5mm 14mm;
+  }
+  .main {
+    display: table-cell;
+    vertical-align: top;
+    width: 108mm;
+    padding-right: 9mm;
+  }
+  .side {
+    display: table-cell;
+    vertical-align: top;
+    width: 74mm;
+    border-left: 0.4pt solid var(--rule);
+    padding-left: 8mm;
+  }
+
+  h2 {
+    font-family: 'PlexMono', monospace;
+    font-size: 6.6pt;
+    font-weight: 400;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2.6mm;
+  }
+  .block { margin-bottom: 4.3mm; }
+  p { margin-bottom: 2.1mm; }
+  p:last-child { margin-bottom: 0; }
+  strong { font-weight: 600; color: var(--ink); }
+
+  .pull {
+    border-left: 1.6pt solid var(--accent);
+    padding: 0.6mm 0 0.6mm 4mm;
+    margin: 3.6mm 0 4.4mm 0;
+    font-size: 8.15pt;
+    line-height: 1.42;
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: -0.006em;
+  }
+
+  /* facts list in sidebar */
+  .fact {
+    padding: 2.2mm 0;
+    border-bottom: 0.35pt solid var(--rule);
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+  .fact:first-of-type { padding-top: 0; }
+  .fact .k {
+    display: table-cell;
+    vertical-align: top;
+    width: 21mm;
+    font-family: 'PlexMono', monospace;
+    font-size: 6.6pt;
+    color: var(--muted);
+    padding-top: 0.5mm;
+    letter-spacing: 0.02em;
+  }
+  .fact .v { display: table-cell; vertical-align: top; font-size: 7.7pt; line-height: 1.4; }
+  .fact .v b { font-weight: 600; color: var(--ink); }
+
+  .card {
+    background: var(--tint);
+    padding: 4mm 4.6mm;
+    margin-bottom: 5mm;
+  }
+  .card h2 { color: var(--ink); }
+  .card p { font-size: 7.7pt; }
+
+  ul { list-style: none; }
+  li {
+    padding-left: 4mm;
+    margin-bottom: 1.6mm;
+    position: relative;
+    font-size: 7.7pt;
+    line-height: 1.4;
+  }
+  li:last-child { margin-bottom: 0; }
+  li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.5mm;
+    width: 1.5mm;
+    height: 1.5mm;
+    background: var(--accent);
+  }
+  li b { font-weight: 600; color: var(--ink); }
+
+  /* ---------- footer ---------- */
+  footer {
+    padding: 0 14mm 6mm 14mm;
+  }
+  .stack {
+    font-family: 'PlexMono', monospace;
+    font-size: 6.2pt;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+    padding-bottom: 3mm;
+    border-bottom: 0.4pt solid var(--rule);
+    margin-bottom: 3mm;
+  }
+  .contact {
+    display: table;
+    width: 100%;
+    font-size: 7.6pt;
+  }
+  .contact > div { display: table-cell; vertical-align: top; }
+  .contact .names { color: var(--ink); font-weight: 500; }
+  .contact .names span { color: var(--muted); font-weight: 400; }
+  .contact .entity {
+    display: block;
+    margin-top: 1.1mm;
+    font-family: 'PlexMono', monospace;
+    font-size: 6.5pt;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.01em;
+  }
+  .contact .reach { text-align: right; font-family: 'PlexMono', monospace; font-size: 7pt; color: var(--muted); }
+  .contact .reach a { color: var(--accent); font-weight: 400; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="topline">
+      <div class="wordmark"><span class="delta">&#916;</span>Delta<span class="by">by Simplified AI</span></div>
+      <div class="meta">
+        Founded March 2025
+      </div>
+    </div>
+    <div class="promise">We find why AI systems fail in production &mdash; and <em>prove the fix didn&rsquo;t break something that used to work.</em></div>
+    <div class="subpromise">One paying enterprise customer in energy. Two founders, full-time eleven months, no outside investment.</div>
+  </header>
+
+  <div class="body">
+
+    <div class="main">
+
+      <div class="block">
+        <h2>The problem</h2>
+        <p>A company ships an LLM system, it passes testing, and then it drifts. A model version changes. Someone edits a prompt. New documents enter the index. An edge case that never mattered starts appearing at scale.</p>
+        <p>Today the repair loop is manual: a user complains, an engineer reads traces, guesses at a change, ships it, and hopes. Most teams have no regression suite for their AI system at all &mdash; so every fix is a coin flip, and the breakage it causes elsewhere stays invisible until a customer finds it.</p>
+      </div>
+
+      <div class="block">
+        <h2>What Delta does</h2>
+        <p>Delta evaluates production behaviour continuously and can test a system <strong>without requiring any change to it</strong> &mdash; we point at the customer&rsquo;s existing endpoint and extract what we need from the response. For a regulated buyer, whose vendor often isn&rsquo;t permitted to touch the deployed system at all, that is the difference between being able to prove something and not.</p>
+        <p>Each evaluation runs the customer&rsquo;s test suite across model, prompt and configuration permutations, scored by an independent evaluation model. The judge is deliberately not the model under test.</p>
+        <p><strong>Automated today:</strong> instrumentation, evaluation, scoring, permutation sweeps, measurement. <strong>Human-assisted:</strong> proposing the fix, and turning a production failure into a permanent regression test. Nothing ships without a person signing off.</p>
+      </div>
+
+      <div class="pull">Every incident becomes a permanent test. After a year, the system holds the institutional memory of everything that ever broke in that company&rsquo;s AI stack &mdash; and that corpus compounds with tenure.</div>
+
+      <div class="block">
+        <h2>Why this is defensible</h2>
+        <p>Evaluation and observability platforms &mdash; Braintrust, LangSmith, Arize, Galileo &mdash; are well built and centred on measurement. They leave the two hardest steps to the engineer: deciding what to change, and knowing the change didn&rsquo;t break something else.</p>
+        <p>Fix generation will commoditise; proving a change safe will not, because it requires the customer&rsquo;s accumulated history. And the buyer is different: everyone above sells developer tools to AI engineers at AI-first companies. We sell to organisations that must survive a regulated buyer&rsquo;s review, and cannot put customer prompts on someone else&rsquo;s cloud.</p>
+      </div>
+
+      <div class="block">
+        <h2>Founders</h2>
+        <p><strong>Anžej Hvala, CEO.</strong> Runs the commercial side. Five-to-nine-month enterprise AI cycles into energy, pharma and legal. Previously founded Slovenia&rsquo;s largest catering company &mdash; operator-run since August 2025, grown eleven months without him in it.</p>
+        <p><strong>David Trafela, CTO.</strong> Wrote the product. Has built and shipped LLM evaluation infrastructure into a regulated enterprise, end to end.</p>
+        <p>Known each other seven years and built together before this. 50/50, no outside stockholders.</p>
+      </div>
+
+    </div>
+
+    <div class="side">
+
+      <div class="block">
+        <h2>Where we are</h2>
+        <div class="fact">
+          <div class="k">Customer</div>
+          <div class="v"><b>A Slovenian energy utility.</b> Retrieval system over internal documentation, running on their own cluster: continuous evaluation, monitoring dashboards, human review workflow. <b>~&euro;52k</b>, delivered June 2026. Named on request.</div>
+        </div>
+        <div class="fact">
+          <div class="k">Pipeline</div>
+          <div class="v"><b>Slovenia&rsquo;s largest fuel and energy retailer.</b> In negotiation at CISO level.</div>
+        </div>
+        <div class="fact">
+          <div class="k">Product</div>
+          <div class="v">Python SDK, evaluation backend and dashboard &mdash; <b>built and deployed</b>. Delta is the productised version of the layer that customer paid for.</div>
+        </div>
+        <div class="fact">
+          <div class="k">Funding</div>
+          <div class="v"><b>None.</b> Revenue-funded to date.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Go to market</h2>
+        <ul>
+          <li><b>The wedge is a diagnostic.</b> We instrument a customer&rsquo;s agent and produce a failure analysis in 48 hours. &euro;5&ndash;15k, free for the first cohort. It is the pitch and the proof at once.</li>
+          <li><b>The business is annual contracts</b> priced per system under management &mdash; &euro;30&ndash;100k, plus implementation where deployment sits inside the customer&rsquo;s own infrastructure.</li>
+          <li><b>Not priced per event or per trace.</b> That axis races to zero. A customer starts with the agent that broke and ends with all of them.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>Why now</h2>
+        <p>We were selected to run a proof of concept at CERN &mdash; the first Slovenian software company to reach that stage &mdash; and then excluded, because our company had not existed for two years.</p>
+        <p>We are building in a market where being new is a formal disqualifier, against a window maybe eighteen months wide. Every company running agents in production will eventually ship one that degrades silently.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="stack">STACK &nbsp;&middot;&nbsp; Python SDK &nbsp;&middot;&nbsp; FastAPI &nbsp;&middot;&nbsp; Postgres &nbsp;&middot;&nbsp; Redis + RQ &nbsp;&middot;&nbsp; React &nbsp;&middot;&nbsp; Docker / Kubernetes &nbsp;&middot;&nbsp; self-hosted in customer infrastructure</div>
+    <div class="contact">
+      <div class="names">Anžej Tomaž Hvala, CEO &nbsp;<span>&middot;</span>&nbsp; David Trafela, CTO<span class="entity">Simplified AI d.o.o., Ljubljana, Slovenia</span></div>
+      <div class="reach"><a href="mailto:tomaz@thesimplified.io">tomaz@thesimplified.io</a> &nbsp;&middot;&nbsp; <a href="https://thesimplified.io">thesimplified.io</a> &nbsp;&middot;&nbsp; live demo <a href="https://delta.thesimplified.io/">delta.thesimplified.io</a></div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
